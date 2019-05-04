@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+	<title>MULTI BRAND PRODUCTS</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link href="/static/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+	<style>
+		@import url(http://fonts.googleapis.com/css?family=Roboto:500,100,300,700,400);
+
+		* {
+			margin: 0;
+			padding: 0;
+			font-family: roboto;
+		}
+
+		body { background: #111; }
+
+		hr {
+			margin: 20px;
+			border: none;
+			border-bottom: thin solid rgba(255,255,255,.1);
+		}
+
+
+		h1 span {
+			font-weight: 300;
+			color: #Fd4;
+		}
+	</style>
+	<link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
+</head>
+<script>
+        $.ajax({
+            url: 'http://127.0.0.1:8000/brands/',
+            method: 'GET',
+            success: function (response) {
+                $('#all_brands_body').empty();
+                for (var i = 0; i< response['brands'].length ; i++) {
+                    $('#all_brands').append(
+                        $('<tr>').append(
+                        	$('<td>').append(response['brands'][i]['Brand_id']),
+                            $('<td>').append(response['brands'][i]['Brand_name'].toUpperCase()),
+                        	$('<td>').append(response['brands'][i]["Brand_type"].toUpperCase()),
+                            $('<td>').append(response['brands'][i]["Year_start"]),
+                            $('<td>').append(response['brands'][i]["no_of_product"])
+,
+                            
+                        )
+                    )
+                }
+            }
+        });
+
+	</script>
+<body id="top">
+<div class="wrapper row0">
+	<div id="topbar" class="hoc clear">
+		<div id="logo" class="fl_left">
+				<h1 style="background-color:transparent"><a href="">MULTI BRAND PRODUCTS</a></h1>
+			</div>
+		<div class="fl_right">
+			<ul>
+				<li><a href=""><i class="fa fa-lg fa-home"></i></a></li>
+				<li><img src="/static/images/avatar.png" /></li>
+				<li><button type="button" id="myBtn" style="color: black">USERNAME</button></li>
+				<li><button type="button" id="myBtn1" style="color: black" onclick="logout()" >LOGOUT</button></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<br/>
+<div class="wrapper row3">
+	<p class="heading" id="currentId"><b>BRANDS</b></p>
+      <section class="one_half first">
+        <ul class="nospace">
+          <li>
+              <table id="all_brands" style="width:100%;" class="table table-hover table-striped ">
+                  <thead>
+                  <tr>
+                  	<th>ID</th>	
+                      <th>Name</th>
+                      <th>type</th>
+                      <th>Year Of Establiashment</th>
+                      <th>Number Of Products</th> 
+                  </tr>
+                  </thead>
+                  <tbody id="all_brands_body">
+                  </tbody>
+              </table>
+          </li>
+        </ul>
+      </section>
+</div>
+<hr><br/>
+
+<div class="hoc clear">
+	<div id="homepage" class="clear" style="align-content: center">
+		<div class="fl_left">
+		<h1 id="admin_name" class="heading" style="color:floralwhite ">hello!! username </h1 >
+			<p style="color:floralwhite " >YOU ARE ADMIN !!!!!!!<br>       ADD SOME NEW PRODUCTS AND BRANDS !!!</p>
+		</div>
+	</div>
+	<br/>
+	<div class="fa-table"  style="background-color: transparent">
+		
+		<div class="one_third" >	
+			<input type="button" value="Add New Brand" onclick="$('#addNewBrand').toggle('fast')" class="btn btn-primary btn-lg ">
+			<form role="form" action="http://127.0.0.1:8000/brands/addBrand" method="POST" name="addNewBrand" id="addNewBrand" class="addNewBrand moveRight" hidden="hidden" enctype="multipart/form-data">
+				<br/>
+				
+				<label for="Brand_name">Brand name</label>
+				<input name="Brand_name" class ="Brand_name form-control" type="text" id="Brand_name">
+				<label for="Year_start">Established In Year</label>
+				<input name="Year_start" class ="Year_start form-control" type="text" id="Year_start">
+				<label for="Brand_type">Brand_type</label>
+				<input name="Brand_type" class ="Brand_type form-control" type="text" id="Brand_type">
+				<br/>
+				<input type="submit" name="addNewBrand" value="ADD" class="btn btn-success"/>
+				<button type="button" onclick="$('#addNewBrand').toggle('fast')" class="btn btn-warning">DONE</button>
+			</form>
+		</div>
+
+
+		<div class="one_third">
+			<input type="button" value="Add product to brand" onclick="$('#addProductToBrand').toggle('fast')" class="btn btn-primary btn-lg ">
+			<br/><br/>
+			<br/>
+			<form role="form" action="http://127.0.0.1:8000/products/addProduct" method="POST" name="addProductToBrand" id="addProductToBrand" class="addProductToBrand moveRight" hidden="hidden" enctype="multipart/form-data">
+				<label for="Brand_id"> Brand ID</label><input name="Brand_id" class ="Brand_id form-control" type="text" id="Brand_id">
+				<label for="Product_name"> PRODUCT NAME</label><input name="Product_name" class ="Product_name form-control" type="text" id="Product_name">
+				<label for="Product_description"> PRODUCT AND PRIZE DESCRIPTION</label><input name="Product_description" class ="Product_description form-control" type="text" id="Product_description">
+				<label for="Product_Pic">PRODUCT PIC</label>
+				<input type="file" name="Product_Pic" id="Product_Pic" data-preview-file-type="image" accept="image/*" multiple>
+				<br/>
+				<input type="submit" onclick="addProductToBrand()" class="btn btn-success" value="ADD">
+				<button type="button" onclick="$('#addProductToBrand').toggle('fast')" class="btn btn-warning">DONE</button>
+			</form>
+		</div>
+	</div>
+</div>
+<br/>
+<div class="wrapper row4 bgded overlay" style="background-image:url('images/demo/backgrounds/03.png');">
+	<footer id="footer" class="hoc clear">
+		<!-- ################################################################################################ -->
+		<h3 class="heading">MULTI BRAND PRODUCTS</h3>
+		<nav>
+			<ul class="nospace inline pushright uppercase">
+				<li><a href=""><i class="fa fa-lg fa-home"></i></a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Contact</a></li>
+				<li><a href="#">Team</a></li>
+			</ul>
+		</nav>
+		<ul class="faico clear">
+			<li><a class="faicon-facebook" href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+			<li><a class="faicon-twitter" href="https://www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+			<li><a class="faicon-instagram" href="https://www.instagram.com"><i class="fa fa-instagram"></i></a></li>
+		</ul>
+		<!-- ################################################################################################ -->
+	</footer>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+	<div id="copyright" class="hoc clear">
+		<!-- ################################################################################################ -->
+		<p class="center">Copyright &copy; 2019 - All Rights Reserved - <a href="#">MULTI BRANDS</a></p>
+		<!-- ################################################################################################ -->
+	</div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+<script src="https://web.iiit.ac.in/~harshit.harchani/jquery.js"></script>
+<script>
+        var len1=document.getElementById('admin_name');
+        var len2=document.getElementById('myBtn');
+        var len3=document.getElementById('userImage');
+        console.log(len1.innerHTML);
+        $.ajax({
+            url: 'http://127.0.0.1:8000/user/getUserDetail',
+            method: 'GET',
+            success: function (response) {
+                console.log(response);
+                len1.innerHTML= "HELLO!!! " + response['user'][0]['username'];
+                len2.innerHTML= response['user'][0]['username'].toUpperCase();
+                var img=document.createElement("img");
+                img.src = "/static/images/user_images/" + response['user'][0]['user_id'];
+                img.style = "height: 400px ; width: 280px";
+				len3.appendChild(img);
+            },
+            error: function (response) {
+                console.log(response);
+                alert("no");
+            }
+        });
+
+var logout=function ()
+{
+      $(document).ready(function(){
+         $.ajax({
+            url: 'http://127.0.0.1:8000/user/logout',
+            method: 'GET',
+            success: function (response){
+                alert("logout");
+                window.location.href = "http://127.0.0.1:8000"
+            },
+        });
+    });
+}
+ 
+</script>
+
+<script src="/static/scripts/jquery.backtotop.js"></script>
+<script src="/static/scripts/jquery.mobilemenu.js"></script>
+<script src="/static/scripts/jquery.flexslider-min.js"></script>
+</body>
+</html>

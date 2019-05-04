@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MULTI BRAND PRODUCTS</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="/static/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+</head>
+<style type="text/css">
+    {
+  box-sizing: border-box;
+}
+
+/* Style the search field */
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+<body id="top">
+
+<div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content col-md-12">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">User Login</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <article role="login">
+                        <h3 class="text-center"><i class="fa fa-lock"></i>USER</h3>
+                        <form role="form" action="http://127.0.0.1:8000/user/login" method="post" name="loginform">
+                            <fieldset>
+                                <legend>Login</legend>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" name="email" placeholder="Your Email" required class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" name="password" placeholder="Your Password" required class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" name="login" value="Login" class="btn btn-primary" />
+                                </div>
+                            </fieldset>
+                        </form>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+<div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content col-md-12">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h4 class="modal-title">Sign-Up Form</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <article role="login">
+                    <h3 class="text-center"><i class="fa fa-lock"></i> Create User Account</h3>
+                    <form role="form" action="http://127.0.0.1:8000/user/register" method="post" name="signupform" enctype=multipart/form-data>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label >First Name</label>
+                            <input type="text" id="first_name" name="first_name" placeholder="Enter First Name" class="form-control" width="50%"/>
+                            <span class="text-danger"><?php if (isset($name_error)) echo $name_error; ?></span>
+                        </div>
+                        <div class="form-group">
+                            <label >Middle Name <small>(optional)</small></label>
+                            <input type="text" name="middle_name" id="middle_name" placeholder="Enter MiddleName"  class="form-control" />
+                            <span class="text-danger"><?php if (isset($name_error)) echo $name_error; ?></span>
+                        </div>
+                        <div class="form-group">
+                            <label >Last Name</label>
+                            <input type="text" name="last_name" id="last_name" placeholder="Enter Last Name" class="form-control" width="50%"/>
+                            <span class="text-danger"><?php if (isset($name_error)) echo $name_error; ?></span>
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label >Username</label>
+                            <input type="text"  name="username" id="username" class="form-control" placeholder="Enter Username" >
+                            <span class="text-danger"><?php if (isset($username_error)) echo $username_error; ?></span>
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label >User Email</label>
+                            <input type="email" name="email" id="email" placeholder="Enter Email Adderess" class="form-control" />
+                            <span class="text-danger"><?php if (isset($email_error)) echo $email_error; ?></span>
+                        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="password" id="password" placeholder="Password"  class="form-control" />
+                            <span class="text-danger"><?php if (isset($password_error)) echo $password_error; ?></span>
+                        </div></br>
+                        <div class="form-group">
+                            <input type="submit" name="signup" value="Sign Up" class="btn btn-primary" onclick=refresh() />
+                        </div>
+                    </form>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="wrapper row0">
+<div id="topbar" class="hoc clear">
+<div id="logo" class="fl_left">
+            <h1><a href="">MULTI BRAND PRODUCTS</a></h1>
+        </div>
+    <div class="fl_right">
+        <ul>
+            <li><a href=""><i class="fa fa-lg fa-home"></i></a></li>
+            <li><button type="button" id="myBtn" style="color: black">LOGIN</button></li>
+            <li><button type="button" id="myBtn1" style="color: black">REGISTER</button></li>
+        </ul>
+    </div>
+</div>
+</div>
+
+<!-- Top Background Image Wrapper -->
+    <div id="pageintro" class="hoc clear">
+        <form action="http://127.0.0.1:8000/products/searchProduct" method="POST" name="searchProduct" id="searchProduct" enctype="multipart/form-data" class="example" action="">
+        <input name="Search_Product_name" class ="Search_Product_name form-control" type="text" id="Search_Product_name" placeholder="Search Product... ">
+         <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
+
+<div class="wrapper row3">
+    <div class="hoc container clear">
+        <!-- ################################################################################################ -->
+        <div class="group">
+            <section class="one_half first">
+                <h6 class="heading btmspace-50" style="align-content: center">Top Brands</h6>
+                <p>Top Brand will have Greater Number of products</p>
+                <ul class="nospace">
+                    <li>
+                        <table id="topBrands" style="width:100%;" class="table table-hover table-striped ">
+                            <thead>
+                            <tr>
+                                <th>NAME</th>
+                                <th>TYPE</th>
+                                <th>YEAR OF ESTABLISHMENT</th>
+                                <th>NO OF PRODUCTS</th>
+                            </tr>
+                            </thead>
+                            <tbody id="topBrandsBody">
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+            </section>
+            <section class="one_half">
+                <h6 class="heading btmspace-50" style="align-self: center;">Latest Products</h6>
+                <p>Latest Product are recently added to Database</p>
+                <ul class="nospace">
+                    <li>
+                        <table id="latestProducts" style="width:100%;" class="table table-hover table-striped ">
+                            <thead>
+                            <tr>
+                                <th>NAME</th>
+                                <th>Brand</th>
+                                <th>Description and Prize</th>
+                                <th>Image</th>
+                            </tr>
+                            </thead>
+                            <tbody id="latestProductsBody">
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <!-- ################################################################################################ -->
+    </div>
+</div>
+<!-- ################################################################################################ -->
+<hr/>
+<!-- ################################################################################################ -->
+<div class="wrapper row3">
+        <!-- ################################################################################################ -->
+    </div>
+</div>
+
+<!-- ################################################################################################ -->
+<div class="wrapper row4 bgded overlay" style="background-image:url('images/demo/backgrounds/03.png');">
+    <footer id="footer" class="hoc clear">
+        <!-- ################################################################################################ -->
+        <h3 class="heading">MULTI BRAND PRODUCTS</h3>
+        <nav>
+            <ul class="nospace inline pushright uppercase">
+                <li><a href=""><i class="fa fa-lg fa-home"></i></a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Team</a></li>
+            </ul>
+        </nav>
+        <ul class="faico clear">
+            <li><a class="faicon-facebook" href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+            <li><a class="faicon-twitter" href="https://www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+            <li><a class="faicon-instagram" href="https://www.instagram.com"><i class="fa fa-instagram"></i></a></li>
+        </ul>
+        <!-- ################################################################################################ -->
+    </footer>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+    <div id="copyright" class="hoc clear">
+        <!-- ################################################################################################ -->
+        <p class="center">Copyright &copy; 2019 - All Rights Reserved - <a href="#">MULTI BRAND PRODUCTS</a></p>
+        <!-- ################################################################################################ -->
+    </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script>
+
+    $(document).ready(function(){
+        $("#myBtn").click(function(){
+            $("#myModal1").modal();
+        });
+    });
+    $(document).ready(function(){
+        $("#myBtn1").click(function(){
+            $("#myModal").modal();
+        });
+    });
+    $(document).ready(function(){
+        $("#myBtn2").click(function(){
+            $("#myModal").modal();
+        });
+    });
+
+    var refresh=function () {
+        window.location.href = "http://127.0.0.1:8000";
+    }
+
+</script>
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            url: 'http://127.0.0.1:8000/brands/topbrands',
+            method: 'GET',
+            success: function (response) {
+                $('#topBrandsBody').empty();
+
+                for (var i = 0; i< 7 ; i++) {
+                    $('#topBrands').append(
+                        $('<tr>').append(
+                            $('<td>').append(response['brands'][i]['Brand_name'].toUpperCase()),
+                            $('<td>').append(response['brands'][i]["Brand_type"].toUpperCase()),
+                            $('<td>').append(response['brands'][i]["Year_start"]),
+                            $('<td>').append(response['brands'][i]["no_of_product"])
+,
+                            
+                        )
+                    )
+                }
+            }
+        })
+        $.ajax({
+            url: 'http://127.0.0.1:8000/products/',
+            method: 'GET',
+            success: function (response) {
+                $('#latestProductsBody').empty();
+
+                for (var i = 0; i< 7 ; i++) {
+                    
+                    var link = document.createElement("a")
+                    link.setAttribute("href",response["Product"][i]["Product_link"])
+                    var linkText = document.createTextNode("Click Me")
+                    link.setAttribute("target","_blank")
+                    link.appendChild(linkText)
+                    
+                    $('#latestProducts').append(
+                        $('<tr>').append(
+                            $('<td>').append(response['Product'][i]['Product_name'].toUpperCase()),
+                            $('<td>').append(response['Product'][i]["Product_Brand"].toUpperCase()),
+                            $('<td>').append(response['Product'][i]["Product_description"]),
+                            $('<td>').append(link)
+                        )
+                    )
+                }
+            }
+        })
+        $.ajax({
+            url: 'http://127.0.0.1:8000/brands/',
+            method: 'GET',
+            success: function (response) {
+                
+            }
+        })
+    });
+</script>
+<script src="/static/scripts/jquery.backtotop.js"></script>
+<script src="/static/scripts/jquery.mobilemenu.js"></script>
+<script src="/static/scripts/jquery.flexslider-min.js"></script>
+</body>
+</html>
